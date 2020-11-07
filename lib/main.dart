@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import './pages/new_patient.dart';
+import './pages/patient_records.dart';
 
 void main() => runApp(MyApp());
 
@@ -70,7 +71,10 @@ class MyHomePage extends StatelessWidget {
               leading: Icon(Icons.people),
               title: Text('Patient Records'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyStatelessWidget()));
               },
             ),
             ListTile(
