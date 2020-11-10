@@ -4,16 +4,21 @@ import 'package:flutter/rendering.dart';
 import './pages/new_patient.dart';
 import './pages/patient_records.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  final appTitle = 'SolidarMed eHealth';
-
+  final String appTitle = 'SolidarMed eHealth';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: appTitle,
-      home: MyHomePage(title: appTitle),
+      title: "SolidarMed - DFID Mobile App",
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(title: appTitle),
+        '/addpatient': (context) => AddPatient(),
+      },
     );
   }
 }
@@ -62,9 +67,10 @@ class MyHomePage extends StatelessWidget {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AddPatient()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => AddPatient()));
                 //Navigator.pop(context);
+                Navigator.pushNamed(context, '/addpatient');
               },
             ),
             ListTile(

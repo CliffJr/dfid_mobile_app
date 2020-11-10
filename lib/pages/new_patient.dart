@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddPatient extends StatefulWidget {
-  AddPatientState createState() {
+  createState() {
     return AddPatientState();
   }
 }
@@ -9,44 +9,45 @@ class AddPatient extends StatefulWidget {
 String dropdownStr = 'GENDER';
 
 class AddPatientState extends State<AddPatient> {
-  DateTime _date = DateTime.now();
+  // DateTime _date = DateTime.now();
 
-  Future<Null> selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: _date,
-      firstDate: DateTime(1970),
-      lastDate: DateTime(2100),
-    );
+  // Future<Null> selectDate(BuildContext context) async {
+  //   final DateTime picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: _date,
+  //     firstDate: DateTime(1970),
+  //     lastDate: DateTime(2100),
+  //   );
 
-    if (picked != null && picked != _date) {
-      setState(() {
-        _date = picked;
-        print(_date.toString());
-      });
-    }
-  }
+  //   if (picked != null && picked != _date) {
+  //     setState(() {
+  //       _date = picked;
+  //       print(_date.toString());
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(context) {
-    return Container(
-      // appBar: AppBar(title: Text('Register New Patient')),
-      margin: const EdgeInsets.all(20.0),
-      child: Form(
-          child: Column(children: [
-        fullNameField(),
-        patientNcdNumber(),
-        patientNcdStudyNUmber(),
-        dob(),
-        typeOfDiebetes(),
-        gender(),
-        yearOfDmDiagnosis()
-      ])),
-    );
+    return Scaffold(
+        appBar: AppBar(title: Text('Register New Patient')),
+        body: Container(
+          margin: const EdgeInsets.all(20.0),
+          child: Form(
+              child: Column(children: [
+            fullName(),
+            patientNcdNumber(),
+            patientNcdStudyNUmber(),
+            dob(),
+            typeOfDiebetes(),
+            gender(),
+            yearOfDmDiagnosis()
+          ])),
+        ));
   }
 }
 
-Widget fullNameField() {
+Widget fullName() {
   return TextFormField(
     autofocus: true,
     keyboardType: TextInputType.name,

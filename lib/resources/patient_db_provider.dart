@@ -27,12 +27,12 @@ class PatientDbProvider {
     });
   }
 
-  fetchPatient(int id) async {
+  fetchPatient(int ncdNumber) async {
     final maps = await db.query(
       "Patients",
       columns: null,
-      where: "id = ?",
-      whereArgs: [id],
+      where: "ncdNumber = ?",
+      whereArgs: [ncdNumber],
     );
 
     if (maps.length > 0) {
@@ -42,7 +42,7 @@ class PatientDbProvider {
     return null;
   }
 
-  addPatient(PatientModel patient) {
+  Future<int> addPatient(PatientModel patient) {
     return db.insert("Patients", patient.toMap());
   }
 }

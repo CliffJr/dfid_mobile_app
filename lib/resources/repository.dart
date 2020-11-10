@@ -5,7 +5,19 @@ import '../models/new_patient_model.dart';
 class Repository {
   PatientDbProvider dbProvider = PatientDbProvider();
 
-  fetchTopPatients() {}
+  fetchTopPatients() {
+    // return apiProvider.fetchTopPatients();
+  }
 
-  fetchPatient() {}
+  Future<PatientModel> fetchPatient(int ncdNumber) async {
+    var patient = await dbProvider.fetchPatient(ncdNumber);
+    if (patient != null) {
+      return patient;
+    }
+
+    //patient = await apiProvider.fetchPatient(ncdNumber);
+    dbProvider.addPatient(patient);
+
+    return patient;
+  }
 }
