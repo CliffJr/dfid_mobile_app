@@ -9,24 +9,7 @@ class AddPatient extends StatefulWidget {
 String dropdownStr = 'GENDER';
 
 class AddPatientState extends State<AddPatient> {
-  // DateTime _date = DateTime.now();
-
-  // Future<Null> selectDate(BuildContext context) async {
-  //   final DateTime picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: _date,
-  //     firstDate: DateTime(1970),
-  //     lastDate: DateTime(2100),
-  //   );
-
-  //   if (picked != null && picked != _date) {
-  //     setState(() {
-  //       _date = picked;
-  //       print(_date.toString());
-  //     });
-  //   }
-  // }
-
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(context) {
     return Scaffold(
@@ -34,82 +17,87 @@ class AddPatientState extends State<AddPatient> {
         body: Container(
           margin: const EdgeInsets.all(20.0),
           child: Form(
+              key: formKey,
               child: Column(children: [
-            fullName(),
-            patientNcdNumber(),
-            patientNcdStudyNUmber(),
-            dob(),
-            typeOfDiebetes(),
-            gender(),
-            yearOfDmDiagnosis()
-          ])),
+                fullName(),
+                patientNcdNumber(),
+                patientNcdStudyNUmber(),
+                dob(),
+                typeOfDiebetes(),
+                gender(),
+                yearOfDmDiagnosis(),
+                Container(margin: EdgeInsets.only(top: 25.0)),
+                submitButton()
+              ])),
         ));
   }
-}
 
-Widget fullName() {
-  return TextFormField(
-    autofocus: true,
-    keyboardType: TextInputType.name,
-    decoration: InputDecoration(labelText: 'FULL NAME'),
-  );
-}
+  Widget fullName() {
+    return TextFormField(
+      autofocus: true,
+      keyboardType: TextInputType.name,
+      decoration: InputDecoration(labelText: 'FULL NAME'),
+    );
+  }
 
-Widget patientNcdNumber() {
-  return TextFormField(
-    autofocus: true,
-    decoration: InputDecoration(labelText: 'PATIENT NCD NUMBER'),
-  );
-}
+  Widget patientNcdNumber() {
+    return TextFormField(
+      autofocus: true,
+      decoration: InputDecoration(labelText: 'PATIENT NCD NUMBER'),
+    );
+  }
 
-Widget patientNcdStudyNUmber() {
-  return TextFormField(
-    autofocus: true,
-    decoration: InputDecoration(labelText: 'PATIENT NCD STUDY NUMBER'),
-  );
-}
+  Widget patientNcdStudyNUmber() {
+    return TextFormField(
+      autofocus: true,
+      decoration: InputDecoration(labelText: 'PATIENT NCD STUDY NUMBER'),
+    );
+  }
 
-Widget dob() {
-  return TextFormField(
-    autofocus: true,
-    keyboardType: TextInputType.datetime,
-    decoration: InputDecoration(labelText: 'DATE OF BIRTH'),
-    onTap: () {
-      // selectDate(context);
-    },
-  );
-}
+  Widget dob() {
+    return TextFormField(
+      autofocus: true,
+      keyboardType: TextInputType.datetime,
+      decoration: InputDecoration(labelText: 'DATE OF BIRTH'),
+    );
+  }
 
-Widget typeOfDiebetes() {
-  return TextFormField(
-    autofocus: true,
-    decoration: InputDecoration(labelText: 'TYPE OF DIABETES'),
-  );
-}
+  Widget typeOfDiebetes() {
+    return TextFormField(
+      autofocus: true,
+      decoration: InputDecoration(labelText: 'TYPE OF DIABETES'),
+    );
+  }
 
-Widget gender() {
-  return DropdownButton<String>(
-      value: dropdownStr,
-      onChanged: (String newValue) {
-        // setState(() {
-        //   dropdownStr = newValue;
-        // });
-      },
-      items: <String>['GENDER', 'Female', 'Male']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList());
-}
+  Widget gender() {
+    return DropdownButton<String>(
+        value: dropdownStr,
+        onChanged: (String newValue) {
+          // setState(() {
+          //   dropdownStr = newValue;
+          // });
+        },
+        items: <String>['GENDER', 'Female', 'Male']
+            .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(value: value, child: Text(value));
+        }).toList());
+  }
 
-Widget yearOfDmDiagnosis() {
-  return TextFormField(
-    autofocus: true,
-    decoration: InputDecoration(labelText: 'YEAR OF DM DIAGNOSIS'),
-  );
-}
+  Widget yearOfDmDiagnosis() {
+    return TextFormField(
+      autofocus: true,
+      decoration: InputDecoration(labelText: 'YEAR OF DM DIAGNOSIS'),
+    );
+  }
 
-submitButton() {
-  return RaisedButton(child: Text('Submit'), onPressed: () {});
+  submitButton() {
+    return RaisedButton(
+        color: Colors.blue,
+        child: Text('Submit'),
+        onPressed: () {
+          formKey.currentState.reset();
+        });
+  }
 }
 
 //Second Form
