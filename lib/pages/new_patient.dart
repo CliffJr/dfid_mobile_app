@@ -10,6 +10,8 @@ String dropdownStr = 'GENDER';
 
 class AddPatientState extends State<AddPatient> {
   final formKey = GlobalKey<FormState>();
+  String fullname = '';
+
   @override
   Widget build(context) {
     return Scaffold(
@@ -37,6 +39,15 @@ class AddPatientState extends State<AddPatient> {
       autofocus: true,
       keyboardType: TextInputType.name,
       decoration: InputDecoration(labelText: 'FULL NAME'),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Field required!';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        fullname = value;
+      },
     );
   }
 
@@ -95,9 +106,9 @@ class AddPatientState extends State<AddPatient> {
         color: Colors.blue,
         child: Text('Submit'),
         onPressed: () {
-          formKey.currentState.reset();
+          if (formKey.currentState.validate()) {
+            formKey.currentState.save();
+          }
         });
   }
 }
-
-//Second Form
